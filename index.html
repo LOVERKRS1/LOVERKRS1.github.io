@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOIDINK - Модельное агентство</title>
+    <style>
+        /* Основные стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка */
+        header {
+            padding: 30px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #ff3366;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ff3366;
+        }
+        
+        /* Герой секция */
+        .hero {
+            height: 100vh;
+            background: url('images/hero-bg.jpg') no-repeat center center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+        
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff3366;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #ff1a53;
+            transform: translateY(-3px);
+        }
+        
+        /* О нас */
+        .about {
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #ff3366;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 50px;
+            text-align: left;
+        }
+        
+        .about-text {
+            flex: 1;
+            padding-right: 50px;
+        }
+        
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #ccc;
+        }
+        
+        .about-image {
+            flex: 1;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(255, 51, 102, 0.2);
+        }
+        
+        /* Услуги */
+        .services {
+            padding: 100px 0;
+            background-color: #111;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .service-card {
+            background-color: #1a1a1a;
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            font-size: 50px;
+            color: #ff3366;
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        .service-card p {
+            color: #ccc;
+            font-size: 15px;
+        }
+        
+        /* Портфолио */
+        .portfolio {
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 300px;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 51, 102, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-overlay h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .portfolio-overlay p {
+            font-size: 16px;
+            max-width: 80%;
+        }
+        
+        /* Контакты */
+        .contact {
+            padding: 100px 0;
+            background-color: #111;
+        }
+        
+        .contact-content {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            padding-right: 50px;
+        }
+        
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .info-icon {
+            font-size: 20px;
+            color: #ff3366;
+            margin-right: 15px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            background-color: #1a1a1a;
+            padding: 40px;
+            border-radius: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #2a2a2a;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        textarea.form-control {
+            height: 150px;
+            resize: none;
+        }
+        
+        /* Футер */
+        footer {
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #1a1a1a;
+            border-radius: 50%;
+            margin: 0 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #ff3366;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            font-size: 14px;
+            color: #777;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+                padding: 0 20px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .contact-content {
+                flex-direction: column;
+            }
+            
+            .contact-info {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">VOID<span>INK</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#services">Услуги</a></li>
+                        <li><a href="#portfolio">Портфолио</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="container">
+                <h1>VOIDINK MODELS</h1>
+                <p>Профессиональное модельное агентство, которое поможет раскрыть ваш потенциал и вывести карьеру на новый уровень</p>
+                <a href="#contact" class="btn">Связаться с нами</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- О нас -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">О НАС</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Мы создаем будущее моды</h3>
+                    <p>VOIDINK - это инновационное модельное агентство, которое объединяет талантливых людей и ведущие бренды по всему миру. Наша миссия - раскрывать потенциал внешности наших моделей и создавать уникальные возможности для роста.</p>
+                    <p>С 2021 года мы работаем на Российском рынке, сотрудничая с топовыми фотографами, дизайнерами и рекламными агентствами. Наш подход сочетает в себе профессиональный менеджмент и индивидуальный подход к каждой модели.</p>
+                    <p>Мы верим, что красота многогранна, и стремимся к разнообразию в индустрии моды. Наше агентство открыто для людей всех национальностей и типажей.</p>
+                </div>
+                <div class="about-image">
+                    <img src="images/about.jpg" alt="О VOIDINK">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Услуги -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">НАШИ УСЛУГИ</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Фотосессии</h3>
+                    <p>Профессиональные портфолио для моделей, съемки для каталогов и рекламных кампаний с лучшими фотографами индустрии.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-walking"></i>
+                    </div>
+                    <h3>Показы мод</h3>
+                    <p>Подготовка к подиумным показам, обучение дефиле и организация участия в неделях моды.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Менеджмент</h3>
+                    <p>Полное сопровождение карьеры модели: контракты, переговоры, планирование работы и юридическая поддержка.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Обучение</h3>
+                    <p>Профессиональные курсы для начинающих моделей: позирование, дефиле, актерское мастерство и уход за собой.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Крупные контракты</h3>
+                    <p>Организация работы с популярными Российскими брендами и подготовка к международной карьере.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-ad"></i>
+                    </div>
+                    <h3>Рекламные кампании</h3>
+                    <p>Участие в съемках для брендов одежды, косметики, ювелирных изделий и других рекламных проектов.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2 class="section-title">НАШИ РАБОТЫ</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="images/portfolio1.jpg" alt="Модель 1">
+                    <div class="portfolio-overlay">
+                        <h3>Валерия М.</h3>
+                        <p>Съемка для журнала InStyle</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="images/portfolio2.jpg" alt="Модель 2">
+                    <div class="portfolio-overlay">
+                        <h3>Салам С.</h3>
+                        <p>Съемка для бренда BEND</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="images/portfolio3.jpg" alt="Модель 3">
+                    <div class="portfolio-overlay">
+                        <h3>Елена С.</h3>
+                        <p>Съемка для бренда Aria Cove</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="images/portfolio4.jpg" alt="Модель 4">
+                    <div class="portfolio-overlay">
+                        <h3>Артем Л.</h3>
+                        <p>Рекламный контракт с брендом Naohasa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">СВЯЖИТЕСЬ С НАМИ</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Контакты</h3>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <p>Краснодар, ул. Северная, 320</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <p>+7 (928) 125-18-91</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <p>info@voidink.com</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <p>Пн-Пт: 10:00 - 19:00</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.instagram.com/voidink_models?igsh=MXBhN2p5ejkzYnB3eA%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/voidink_models?igsh=MXBhN2p5ejkzYnB3eA%3D%3D&utm_source=qr"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://t.me/VOIDINK_MODELS"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://www.instagram.com/voidink_models?igsh=MXBhN2p5ejkzYnB3eA%3D%3D&utm_source=qr"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="copyright">&copy; 2023 VOIDINK MODELS. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
